@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, SafeAreaView, Button } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { NativeBaseProvider } from 'native-base';
 import { ProvedorEstadoGlobal } from '../hooks/EstadoGlobal';
@@ -18,17 +18,41 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   return (
-   <NativeBaseProvider>
-   <ProvedorEstadoGlobal>
-     <View style={{ flex: 1 }}>
-       {/* Componente para adicionar tarefas */}
-       <AdicionarTarefa />
-       {/* Componente que lista as tarefas */}
-       <ListaTarefas />
-     </View>
-   </ProvedorEstadoGlobal>
- </NativeBaseProvider>
+     <NativeBaseProvider>
+      <ProvedorEstadoGlobal>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <Button title="Logout" onPress={handleLogout} />
+          </View>
+          <View style={styles.content}>
+            {/* Componente para adicionar tarefas */}
+            <AdicionarTarefa />
+            {/* Componente que lista as tarefas */}
+            <ListaTarefas />
+          </View>
+        </SafeAreaView>
+      </ProvedorEstadoGlobal>
+    </NativeBaseProvider>
   );
 };
+
+// Estilos para o layout da tela
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    padding: 16,
+  },
+  header: {
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    marginBottom: 16,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+});
 
 export default HomeScreen;
