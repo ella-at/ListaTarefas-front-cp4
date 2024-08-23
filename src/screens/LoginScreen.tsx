@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet, ImageBackground } from 'react-native';
 
 type Props = {
   navigation: NativeStackNavigationProp<any, any>;
@@ -55,20 +55,22 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Username"
+          placeholderTextColor="#888"
           value={username}
           onChangeText={setUsername}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#888"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
         />
-        <View style={styles.buttonContainer}>
-          <Button title="Login" onPress={handleLogin} />
+        <TouchableOpacity style={styles.button} onPress=handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
         </View>
-      </View>
     </ImageBackground>
   );
 };
@@ -83,16 +85,20 @@ const styles = StyleSheet.create({
     height: '100%', // Altura total da tela
   },
   container: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Fundo branco semitransparente
+    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Fundo branco semitransparente
     padding: 20,
     borderRadius: 10,
     width: '90%', // Proporção da largura da tela
     maxWidth: 400, // Limita o tamanho máximo da largura
     alignItems: 'center', // Centraliza os inputs no container
+    shadowColor: '#000', // Cor da sombra
+    shadowOffset: {width: 0, height: 4}, // Deslocamento da sombra
+    shadowRadius: 8, // Raio da sombra
+    elevation: 5, // Sombra para Android
   },
   title: {
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 28,
+    fontWeight: '700',
     color: '#FF768B',
     textAlign: 'center',
     marginBottom: 20,
@@ -100,21 +106,28 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 15,
   },
   input: {
     width: '100%', // Faz o input ocupar toda a largura disponível
     borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    borderRadius: 5,
+    borderColor: '#ddd',
+    padding: 15,
+    borderRadius: 8,
     marginBottom: 15,
-    backgroundColor: 'pink',
+    backgroundColor: '#fff',
   },
-  buttonContainer: {
-    marginTop: 10,
+  button: {
+    backgroundColor: '#FF768B',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     width: '100%', // Botão ocupa toda a largura disponível
-    borderRadius: 5,
+    alignItens: 'center', // Centraliza o texto do botão
+  },
+  buttonText: {
+    color:'#fff',
+    fontWeight: '600',
   },
 });
 
